@@ -24,7 +24,7 @@ class App
     end
   end
 
-  def create_person(type, age, name, parent_permission: true)
+  def create_person(type, age, name)
     if type == 'student'
       classroom = ask_for_classroom
       person = Student.new(age, classroom, name)
@@ -37,7 +37,7 @@ class App
     end
     @people << person
     puts "Person created: Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
-  end  
+  end
 
   def create_book(title, author)
     book = Book.new(title, author)
@@ -75,15 +75,14 @@ class App
   private
 
   def ask_for_classroom
-    puts "Enter classroom label:"
+    puts 'Enter classroom label:'
     label = gets.chomp
     Classroom.new(label)
   end
 
   def ask_for_specialization
-    puts "Enter specialization:"
-    specialization = gets.chomp
-    specialization
+    puts 'Enter specialization:'
+    gets.chomp
   end
 
   def find_person_by_id(person_id)
