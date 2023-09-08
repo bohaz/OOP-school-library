@@ -4,14 +4,14 @@ def main
   app = App.new
 
   loop do
-    puts 'Choose an option:'
-    puts '1. List all books'
-    puts '2. List all people'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Create a rental'
-    puts '6. List rentals for a person'
-    puts '7. Quit'
+    puts "\nPlease choose an option by entering a number:"
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
 
     choice = gets.chomp.to_i
 
@@ -21,54 +21,20 @@ def main
     when 2
       app.list_people
     when 3
-      create_person(app)
+      app.create_person
     when 4
-      create_book(app)
+      app.create_book
     when 5
-      create_rental(app)
+      app.create_rental
     when 6
-      list_rentals_for_person(app)
+      app.list_rentals_by_person_id
     when 7
-      puts 'Goodbye!'
+      puts 'Thank you for using this app!'
       break
     else
-      puts 'Invalid choice. Please choose a valid option.'
+      puts 'Invalid option. Please enter a number between 1 and 7.'
     end
   end
-end
-
-def create_person(app)
-  puts 'Enter person type (student/teacher):'
-  type = gets.chomp.downcase
-  puts 'Enter age:'
-  age = gets.chomp.to_i
-  puts 'Enter name:'
-  name = gets.chomp
-  app.create_person(type, age, name)
-end
-
-def create_book(app)
-  puts 'Enter title:'
-  title = gets.chomp
-  puts 'Enter author:'
-  author = gets.chomp
-  app.create_book(title, author)
-end
-
-def create_rental(app)
-  puts 'Enter person ID:'
-  person_id = gets.chomp.to_i
-  puts 'Enter book title:'
-  book_title = gets.chomp
-  puts 'Enter date (YYYY-MM-DD):'
-  date = gets.chomp
-  app.create_rental(person_id, book_title, date)
-end
-
-def list_rentals_for_person(app)
-  puts 'Enter person ID:'
-  person_id = gets.chomp.to_i
-  app.list_rentals_for_person(person_id)
 end
 
 main
