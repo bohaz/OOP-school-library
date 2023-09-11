@@ -38,6 +38,7 @@ class App
       puts 'Student Created successfully'
     elsif choice == 2
       create_teacher(age, name)
+      puts 'Teacher Created successfully'
     else
       puts 'Invalid option'
       return
@@ -55,7 +56,8 @@ class App
   def create_teacher(age, name)
     print 'Specialization: '
       specialization = gets.chomp
-      person = Teacher.new(age, specialization, name)
+      person = Teacher.new(age, specialization, name, parent_permission: true)
+      @people.push(person)
   end
 
   def create_book
