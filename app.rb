@@ -42,25 +42,7 @@ class App
       puts 'Invalid option'
       return
     end
-    # @people << person
-    # puts "#{person.class} created successfully"
   end
-
-
-  #   if choice == 1
-  #     classroom = Classroom.new('10th Grade')
-  #     person = Student.new(age, classroom, name)
-  #   elsif choice == 2
-  #     print 'Specialization: '
-  #     specialization = gets.chomp
-  #     person = Teacher.new(age, specialization, name)
-  #   else
-  #     puts 'Invalid option'
-  #     return
-  #   end
-  #   @people << person
-  #   puts "#{person.class} created successfully"
-  # end
 
   def create_student(age, name)
    print 'Classrom: '
