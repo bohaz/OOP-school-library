@@ -33,7 +33,7 @@ class App
 
     print 'Name: '
     name = gets.chomp
-    if choice == 1 
+    if choice == 1
       create_student(age, name)
       puts 'Student Created successfully'
     elsif choice == 2
@@ -41,23 +41,23 @@ class App
       puts 'Teacher Created successfully'
     else
       puts 'Invalid option'
-      return
+      nil
     end
   end
 
   def create_student(age, name)
-   print 'Classrom: '
-   classroom = gets.chomp
-   Classroom.new(classroom)
+    print 'Classrom: '
+    classroom = gets.chomp
+    Classroom.new(classroom)
 
-   @people.push(Student.new(age, classroom, name, parent_permission: true))
+    @people.push(Student.new(age, classroom, name, parent_permission: true))
   end
 
   def create_teacher(age, name)
     print 'Specialization: '
-      specialization = gets.chomp
-      person = Teacher.new(age, specialization, name, parent_permission: true)
-      @people.push(person)
+    specialization = gets.chomp
+    person = Teacher.new(age, specialization, name, parent_permission: true)
+    @people.push(person)
   end
 
   def create_book
