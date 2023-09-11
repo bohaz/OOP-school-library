@@ -33,20 +33,47 @@ class App
 
     print 'Name: '
     name = gets.chomp
-
-    if choice == 1
-      classroom = Classroom.new('10th Grade')
-      person = Student.new(age, classroom, name)
+    if choice == 1 
+      create_student(age, name)
+      puts 'Student Created successfully'
     elsif choice == 2
-      print 'Specialization: '
-      specialization = gets.chomp
-      person = Teacher.new(age, specialization, name)
+      create_teacher(age, name)
     else
       puts 'Invalid option'
       return
     end
-    @people << person
-    puts "#{person.class} created successfully"
+    # @people << person
+    # puts "#{person.class} created successfully"
+  end
+
+
+  #   if choice == 1
+  #     classroom = Classroom.new('10th Grade')
+  #     person = Student.new(age, classroom, name)
+  #   elsif choice == 2
+  #     print 'Specialization: '
+  #     specialization = gets.chomp
+  #     person = Teacher.new(age, specialization, name)
+  #   else
+  #     puts 'Invalid option'
+  #     return
+  #   end
+  #   @people << person
+  #   puts "#{person.class} created successfully"
+  # end
+
+  def create_student(age, name)
+   print 'Classrom: '
+   classroom = gets.chomp
+   Classroom.new(classroom)
+
+   @people.push(Student.new(age, classroom, name, parent_permission: true))
+  end
+
+  def create_teacher(age, name)
+    print 'Specialization: '
+      specialization = gets.chomp
+      person = Teacher.new(age, specialization, name)
   end
 
   def create_book
