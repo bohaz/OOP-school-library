@@ -80,6 +80,12 @@ Clone this repository to your desired folder:
 - Twitter: [@Ricardo29115571](https://twitter.com/Ricardo29115571)
 - LinkedIn: [Ricardo Martinez](https://www.linkedin.com/in/ricardomart%C3%ADnez%E2%88%B4/)
 
+👤 **Henok Mekonnen**
+
+- GitHub: [@githubhandle](https://github.com/henask12)
+- Twitter: [@twitterhandle](https://twitter.com/henok_mekonnen3)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/henok-mekonnen-491685188)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
