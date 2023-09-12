@@ -24,29 +24,39 @@ class App
     end
   end
 
+  def create_student(age, name)
+    print 'Classrom: '
+    classroom = gets.chomp
+    Classroom.new(classroom)
+
+    @people.push(Student.new(age, classroom, name, parent_permission: true))
+  end
+
   def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     choice = gets.chomp.to_i
-
     print 'Age: '
     age = gets.chomp.to_i
-
     print 'Name: '
     name = gets.chomp
-
-    if choice == 1
-      classroom = Classroom.new('10th Grade')
-      person = Student.new(age, classroom, name)
-    elsif choice == 2
-      print 'Specialization: '
-      specialization = gets.chomp
-      person = Teacher.new(age, specialization, name)
+    case choice
+    when 1
+      create_student(age, name)
+      puts 'Student Created successfully'
+    when 2
+      create_teacher(age, name)
+      puts 'Teacher Created successfully'
     else
       puts 'Invalid option'
-      return
+      nil
     end
-    @people << person
-    puts "#{person.class} created successfully"
+  end
+
+  def create_teacher(age, name)
+    print 'Specialization: '
+    specialization = gets.chomp
+    person = Teacher.new(age, specialization, name, parent_permission: true)
+    @people.push(person)
   end
 
   def create_book
