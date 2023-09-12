@@ -24,6 +24,14 @@ class App
     end
   end
 
+  def create_student(age, name)
+    print 'Classrom: '
+    classroom = gets.chomp
+    Classroom.new(classroom)
+
+    @people.push(Student.new(age, classroom, name, parent_permission: true))
+  end
+
   def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     choice = gets.chomp.to_i
@@ -42,14 +50,6 @@ class App
       puts 'Invalid option'
       nil
     end
-  end
-
-  def create_student(age, name)
-    print 'Classrom: '
-    classroom = gets.chomp
-    Classroom.new(classroom)
-
-    @people.push(Student.new(age, classroom, name, parent_permission: true))
   end
 
   def create_teacher(age, name)
