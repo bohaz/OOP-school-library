@@ -27,16 +27,15 @@ class App
   def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     choice = gets.chomp.to_i
-
     print 'Age: '
     age = gets.chomp.to_i
-
     print 'Name: '
     name = gets.chomp
-    if choice == 1
+    case choice
+    when 1
       create_student(age, name)
       puts 'Student Created successfully'
-    elsif choice == 2
+    when 2
       create_teacher(age, name)
       puts 'Teacher Created successfully'
     else
