@@ -23,34 +23,36 @@ class App
   end
 
   def load_data
-    # Load people
-    if File.exist?('./data/people.json')
-      JSON.parse(File.read('./data/people.json')).each do |person_hash|
-        person = Person.new(person_hash['age'], person_hash['name'], parent_permission: person_hash['parent_permission'])
-        @people << person
-      end
+    load_people if File.exist?('./data/people.json')
+    load_books if File.exist?('./data/books.json')
+    load_rentals if File.exist?('./data/rentals.json')
+  end
+
+  def load_people
+    JSON.parse(File.read('./data/people.json')).each do |person_hash|
+      person = Person.new(person_hash['age'], person_hash['name'],
+                          parent_permission: person_hash['parent_permission'])
+      @people << person
     end
-  
-    # Load books
-    if File.exist?('./data/books.json')
-      JSON.parse(File.read('./data/books.json')).each do |book_hash|
-        @books << Book.new(book_hash['title'], book_hash['author'])
-      end
+  end
+
+  def load_books
+    JSON.parse(File.read('./data/books.json')).each do |book_hash|
+      @books << Book.new(book_hash['title'], book_hash['author'])
     end
-  
-    # Load rentals
-    if File.exist?('./data/rentals.json')
-      JSON.parse(File.read('./data/rentals.json')).each do |rental_hash|
-        book = @books.find { |b| b.title == rental_hash['book_title'] }
-        person = @people.find { |p| p.id == rental_hash['person_id'] }
-        
-        if book.nil? || person.nil?
-          puts "Skipping rental: Book or person not found."
-          next
-        end
-        
-        @rentals << Rental.new(rental_hash['date'], book, person)
+  end
+
+  def load_rentals
+    JSON.parse(File.read('./data/rentals.json')).each do |rental_hash|
+      book = @books.find { |b| b.title == rental_hash['book_title'] }
+      person = @people.find { |p| p.id == rental_hash['person_id'] }
+
+      if book.nil? || person.nil?
+        puts 'Skipping rental: Book or person not found.'
+        next
       end
+
+      @rentals << Rental.new(rental_hash['date'], book, person)
     end
   end
 
