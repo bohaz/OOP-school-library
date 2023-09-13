@@ -1,6 +1,5 @@
 require_relative '../person'
 require_relative '../decorator'
-require_relative '../capitalize_decorator'
 
 describe Person do
   let(:person) { Person.new(26, 'Henok') }
