@@ -38,4 +38,18 @@ describe Person do
 
     expect(person.to_h).to eq(expected_hash)
   end
+  it 'returns correct_name when decorated with CapitalizeDecorator' do
+    decorated_person = CapitalizeDecorator.new(person)
+    allow(person).to receive(:correct_name).and_return('henok')
+
+    expect(decorated_person.correct_name).to eq('Henok')
+  end
+
+  it 'returns trimmed name when decorated with TrimmerDecorator' do
+    decorated_person = TrimmerDecorator.new(person)
+    allow(person).to receive(:correct_name).and_return('A very long name that needs trimming')
+
+    expect(decorated_person.correct_name).to eq('A very lon')
+  end
+  
 end
