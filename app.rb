@@ -1,5 +1,5 @@
-# app.rb
-
+require 'json'
+require 'fileutils'
 require_relative 'person'
 require_relative 'book'
 require_relative 'rental'
@@ -9,9 +9,49 @@ require_relative 'classroom'
 
 class App
   def initialize
+    FileUtils.mkdir_p('./data')
     @people = []
     @books = []
     @rentals = []
+    load_data
+  end
+
+  def save_data
+    File.write('./data/people.json', JSON.dump(@people.map(&:to_h)))
+    File.write('./data/books.json', JSON.dump(@books.map(&:to_h)))
+    File.write('./data/rentals.json', JSON.dump(@rentals.map(&:to_h)))
+  end
+
+  def load_data
+    # Load people
+    if File.exist?('./data/people.json')
+      JSON.parse(File.read('./data/people.json')).each do |person_hash|
+        person = Person.new(person_hash['age'], person_hash['name'], parent_permission: person_hash['parent_permission'])
+        @people << person
+      end
+    end
+  
+    # Load books
+    if File.exist?('./data/books.json')
+      JSON.parse(File.read('./data/books.json')).each do |book_hash|
+        @books << Book.new(book_hash['title'], book_hash['author'])
+      end
+    end
+  
+    # Load rentals
+    if File.exist?('./data/rentals.json')
+      JSON.parse(File.read('./data/rentals.json')).each do |rental_hash|
+        book = @books.find { |b| b.title == rental_hash['book_title'] }
+        person = @people.find { |p| p.id == rental_hash['person_id'] }
+        
+        if book.nil? || person.nil?
+          puts "Skipping rental: Book or person not found."
+          next
+        end
+        
+        @rentals << Rental.new(rental_hash['date'], book, person)
+      end
+    end
   end
 
   def list_books
@@ -43,9 +83,11 @@ class App
     when 1
       create_student(age, name)
       puts 'Student Created successfully'
+      save_data
     when 2
       create_teacher(age, name)
       puts 'Teacher Created successfully'
+      save_data
     else
       puts 'Invalid option'
       nil
@@ -70,6 +112,7 @@ class App
     @books << book
 
     puts 'Book created successfully'
+    save_data
   end
 
   def create_rental
@@ -92,6 +135,7 @@ class App
     @rentals << rental
 
     puts 'Rental created successfully'
+    save_data
   end
 
   def list_rentals_by_person_id
