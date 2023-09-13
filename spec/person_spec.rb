@@ -51,5 +51,4 @@ describe Person do
 
     expect(decorated_person.correct_name).to eq('A very lon')
   end
-  
 end

@@ -18,16 +18,16 @@ describe TrimmerDecorator do
       expect(decorator.correct_name).to eq('Heno')
     end
     it 'handles an empty name' do
-        allow(nameable_mock).to receive(:correct_name).and_return('')
-        decorator = TrimmerDecorator.new(nameable_mock)
-  
-        expect(decorator.correct_name).to eq('')
+      allow(nameable_mock).to receive(:correct_name).and_return('')
+      decorator = TrimmerDecorator.new(nameable_mock)
+
+      expect(decorator.correct_name).to eq('')
     end
     it 'does not trim a 10-character name' do
-        allow(nameable_mock).to receive(:correct_name).and_return('1234567890')
-        decorator = TrimmerDecorator.new(nameable_mock)
-  
-        expect(decorator.correct_name).to eq('1234567890')
+      allow(nameable_mock).to receive(:correct_name).and_return('1234567890')
+      decorator = TrimmerDecorator.new(nameable_mock)
+
+      expect(decorator.correct_name).to eq('1234567890')
     end
   end
 end
