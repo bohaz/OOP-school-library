@@ -1,5 +1,4 @@
 require_relative 'nameable'
-
 class Person < Nameable
   attr_accessor :name, :age, :classroom
   attr_reader :id, :rentals
@@ -23,6 +22,15 @@ class Person < Nameable
 
   def add_rental(rental)
     rentals << rental
+  end
+
+  def to_h
+    {
+      'id' => @id,
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission
+    }
   end
 
   private
