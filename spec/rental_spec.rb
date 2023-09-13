@@ -15,7 +15,7 @@ describe Rental do
     it 'returns a hash representation of the rental' do
       allow(book).to receive(:title).and_return('Animal Farm')
       allow(person).to receive(:id).and_return(1)
-      
+
       expected_hash = {
         'date' => '2023-09-13',
         'book_title' => 'Animal Farm',
