@@ -26,4 +26,13 @@ describe Book do
     expect(book_rented).to eq book
     expect(rental_date).to eq '01-01-2023'
   end
+  it 'returns a hash representation of the book' do
+    book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
+    expected_hash = {
+      'title' => 'The Great Gatsby',
+      'author' => 'F. Scott Fitzgerald'
+    }
+
+    expect(book.to_h).to eq(expected_hash)
+  end
 end
